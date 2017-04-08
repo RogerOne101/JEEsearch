@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +19,8 @@ import javax.sql.DataSource;
 @WebServlet("/profile/Login")
 public final class Login extends HttpServlet {
 
-  @Resource(name = "jdbc/WebOne")
-  private DataSource ds;
+  @EJB
+  private ProfileManager pm;
 
   @Override
   protected void doPost(HttpServletRequest request,
@@ -28,30 +29,15 @@ public final class Login extends HttpServlet {
     String login = request.getParameter("login");
     String passwd = request.getParameter("passwd");
 
-    try (Connection c = ds.getConnection()) {
-      try (Statement s = c.createStatement()) {
-        try (ResultSet rs = s.executeQuery(
-          "select * from profiles where login='" + login + "'")) {
-          if (!rs.next()) { // User o podanym loginie nie istnieje
-            response.sendRedirect("loginform.jsp");
-            return;
-          }
-          String md5Pass = rs.getString("passwd");
-          if (!md5Pass.equals(MD5(passwd))) { // Hasła się nie zgadzają
-            response.sendRedirect("loginform.jsp");
-            return;
-          }
+    if (pm.findProfile(login, passwd) != null) {
+      HttpSession sess = request.getSession(true);
+      sess.setAttribute("LOGGED-IN", Boolean.TRUE);
+      sess.setAttribute("LOGIN", login);
+      response.sendRedirect("../protected.jsp");
+      return;
+    }
 
-          HttpSession sess = request.getSession(true);
-          sess.setAttribute("LOGGED-IN", Boolean.TRUE);
-          sess.setAttribute("LOGIN", login);
-          response.sendRedirect("../protected.jsp");
-        }
-      }
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-    }
+    response.sendRedirect("loginform.jsp");
   }
 
   private static String MD5(String md5) {
