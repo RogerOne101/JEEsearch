@@ -8,8 +8,8 @@ create table profiles (
   primary key(id)
 );
 
-insert into profiles(login, passwd) values ('john' , '12345' );
-insert into profiles(login, passwd) values ('admin', 'root'  );
-insert into profiles(login, passwd) values ('anna' , 'qwerty');
+insert into profiles(login, passwd) values ('john' , md5('12345'));
+insert into profiles(login, passwd) values ('admin', md5('root'));
+insert into profiles(login, passwd) values ('anna' , md5('qwerty'));
 
 commit;
