@@ -10,8 +10,8 @@ public class DB {
     source.setDataSourceName("WEBONE Data Source");
     source.setServerName("localhost");
     source.setDatabaseName("WEBONE");
-    source.setUser("webone");
-    source.setPassword("webone");
+    source.setUser("postgres");
+    source.setPassword("postgres");
     source.setMaxConnections(10);
   }
 }

@@ -1,6 +1,7 @@
 package webone.profile;
 
 import java.io.IOException;
+import java.security.Security;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import utils.WebSecurity;
+
 @WebServlet("/profile/Login")
 public final class Login extends HttpServlet {
 
@@ -28,33 +31,26 @@ public final class Login extends HttpServlet {
 
     String login = request.getParameter("login");
     String passwd = request.getParameter("passwd");
+    
+    Profile profile = pm.findProfile(login, WebSecurity.MD5(passwd));
 
-    if (pm.findProfile(login, passwd) != null) {
-      HttpSession sess = request.getSession(true);
-      sess.setAttribute("LOGGED-IN", Boolean.TRUE);
-      sess.setAttribute("LOGIN", login);
-      response.sendRedirect("../protected.jsp");
-      return;
+    if (profile != null) {
+    	
+    	HttpSession sess = request.getSession(true);
+    	
+    	if (profile instanceof Admin) {
+    		sess.setAttribute("IS-ADMIN", Boolean.TRUE);
+    	} else {
+    		sess.setAttribute("IS-ADMIN", Boolean.FALSE);
+    	}
+    	
+    	sess.setAttribute("LOGGED-IN", Boolean.TRUE);
+    	sess.setAttribute("LOGIN", login);
+    	response.sendRedirect("../protected.jsp");
+    	return;
     }
 
     response.sendRedirect("loginform.jsp");
-  }
-
-  private static String MD5(String md5) {
-    try {
-      java.security.MessageDigest md =
-          java.security.MessageDigest.getInstance("MD5");
-      byte[] array = md.digest(md5.getBytes());
-      StringBuffer sb = new StringBuffer();
-      for (int i = 0; i < array.length; ++i) {
-        sb.append(
-          Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1, 3));
-      }
-      return sb.toString();
-    }
-    catch (java.security.NoSuchAlgorithmException e) {
-    }
-    return null;
   }
 
 }

@@ -8,6 +8,10 @@
 </head>
 <body>
 
+<div class="header">
+	<h3>Logowanie</h3>
+</div>
+
 <form action="Login" method="POST">
 Login:<input type="text"     name="login"  value=""><br>
 Hasło:<input type="password" name="passwd" value=""><br>

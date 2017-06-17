@@ -9,4 +9,20 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+  <servlet-name>SearchController</servlet-name>
+<servlet-class>webone.profile.SearchController</servlet-class>
+</servlet>
+<servlet-mapping>
+  <servlet-name>SearchController</servlet-name>
+  <url-pattern>/SearchController</url-pattern>
+</servlet-mapping>
+<servlet>
+  <servlet-name>ProfileController</servlet-name>
+<servlet-class>webone.profile.ProfileController</servlet-class>
+</servlet>
+<servlet-mapping>
+  <servlet-name>ProfileController</servlet-name>
+  <url-pattern>/ProfileController</url-pattern>
+</servlet-mapping>
 </web-app>

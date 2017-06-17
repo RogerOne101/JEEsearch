@@ -4,7 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @SequenceGenerator(name = "ProfileSeq", initialValue = 1, allocationSize = 100, 
                    sequenceName = "ProfileSeq")
 public abstract class Profile implements Serializable {
@@ -20,6 +20,7 @@ public abstract class Profile implements Serializable {
   private String passwd;
 
   private String email;
+  
   
 //  @ManyToOne
 //  private Address address;

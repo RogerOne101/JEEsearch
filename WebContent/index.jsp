@@ -8,7 +8,9 @@
 </head>
 <body>
 
-<a href="protected.jsp">Idź do chronionej zawartości.</a>
+<a href="protected.jsp">Zaloguj się.</a>
+<br/>
+<a href="profile/register.jsp">Zarejestruj się.</a>
 
 </body>
 </html>
