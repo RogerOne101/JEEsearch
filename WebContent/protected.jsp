@@ -54,8 +54,7 @@
 
 			<script>
 			window.onload = function() {
-				getProfile('<%=session.getAttribute("LOGIN")%>
-				');
+				getProfile('<%=session.getAttribute("LOGIN")%>');
 				};
 			</script>
 		

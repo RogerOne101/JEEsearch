@@ -85,20 +85,20 @@ public class SearchController extends HttpServlet {
 			}
 		}
 
-//		System.out.println("FIRST PERMUTATION EQUALS");
-//		
-//		// FIRST PERMUTATION EQUALS
-//		// if any login starts with or equals any permutation
-//		for (String permutation : permutations) {
-//			for (String login : listToFilterOut) {
-//				if (login.toLowerCase().equals(permutation)) {
-//					if (!result.contains(login))
-//						result.add(login);
-//					if (result.size() >= MAX_RECORDS)
-//						return result;
-//				}
-//			}
-//		}
+		System.out.println("FIRST PERMUTATION EQUALS");
+		
+		// FIRST PERMUTATION EQUALS
+		// if any login starts with or equals any permutation
+		for (String permutation : permutations) {
+			for (String login : listToFilterOut) {
+				if (login.toLowerCase().equals(permutation)) {
+					if (!result.contains(login))
+						result.add(login);
+					if (result.size() >= MAX_RECORDS)
+						return result;
+				}
+			}
+		}
 		
 		System.out.println("FIRST PERMUTATION STARTWS WITH");
 
@@ -135,20 +135,20 @@ public class SearchController extends HttpServlet {
 			System.out.println("Second permutations done, n: "+permutations2.size());
 		}
 		
-//		System.out.println("SECOND PERMUTATION EQUALS");
-//
-//		// SECOND PERMUTATION EQUALS
-//		// if any login starts with or equals any permutations2
-//		for (String permutation : permutations2) {
-//			for (String login : listToFilterOut) {
-//				if (login.toLowerCase().equals(permutation)) {
-//					if (!result.contains(login))
-//						result.add(login);
-//					if (result.size() >= MAX_RECORDS)
-//						return result;
-//				}
-//			}
-//		}
+		System.out.println("SECOND PERMUTATION EQUALS");
+
+		// SECOND PERMUTATION EQUALS
+		// if any login starts with or equals any permutations2
+		for (String permutation : permutations2) {
+			for (String login : listToFilterOut) {
+				if (login.toLowerCase().equals(permutation)) {
+					if (!result.contains(login))
+						result.add(login);
+					if (result.size() >= MAX_RECORDS)
+						return result;
+				}
+			}
+		}
 		
 		System.out.println("SECOND PERMUTATION STARTS WITH");
 
